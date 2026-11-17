@@ -1,0 +1,15 @@
+# Normalize line endings: LF in the repo, checked out per-OS default.
+* text=auto eol=lf
+
+# Rust sources always LF
+*.rs text eol=lf
+*.toml text eol=lf
+*.yml text eol=lf
+*.md text eol=lf
+
+# Shell scripts must be LF
+*.sh text eol=lf
+
+# Fonts are binary
+*.otf binary
+*.ttf binary

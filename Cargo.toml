@@ -1,0 +1,47 @@
+[package]
+name = "modelfolio"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.88"
+description = "Local-only catalog for AI gateways and models, with tags, changelog and OS-keyring secrets."
+license = "MIT OR Apache-2.0"
+readme = "README.md"
+repository = "https://github.com/HeronKyaw/modelfolio"
+keywords = ["ai", "llm", "catalog", "egui", "local-first"]
+categories = ["gui", "development-tools"]
+
+[dependencies]
+# UI (glow renderer: broadest GPU compatibility across Windows/macOS/Linux)
+eframe = "0.36"
+egui = "0.36"
+egui_extras = "0.36"
+egui-phosphor = { version = "0.14", features = ["regular"] }
+
+# async + http (rustls-only, system roots via platform verifier)
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "sync", "time"] }
+reqwest = { version = "0.13", default-features = false, features = ["default-tls", "charset", "http2", "system-proxy", "json", "gzip"] }
+
+# platform secret stores (Windows Credential Manager, macOS Keychain, Linux Secret Service)
+keyring = "4"
+
+# local cache
+rusqlite = { version = "0.43", features = ["bundled"] }
+
+# misc
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+zeroize = "1"
+thiserror = "2"
+url = "2"
+uuid = { version = "1", features = ["v4"] }
+chrono = { version = "0.4", features = ["serde"] }
+dirs = "7"
+dark-light = "3"
+arboard = "3"
+notify-rust = "4"
+
+[profile.release]
+lto = true
+opt-level = 3
+strip = true
+codegen-units = 1
